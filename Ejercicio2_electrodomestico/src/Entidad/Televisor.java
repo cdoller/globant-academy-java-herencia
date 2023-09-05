@@ -11,7 +11,7 @@ public class Televisor extends Electrodomestico {
     public Televisor() {
     }
 
-    public Televisor(double tamanioPulgadas, boolean sintonizadorTDT, double precioUsd, String color, char categoriaConsumoEnergetico, double pesoKg) {
+    public Televisor(double tamanioPulgadas, boolean sintonizadorTDT, double precioUsd, String color, String categoriaConsumoEnergetico, double pesoKg) {
         super(precioUsd, color, categoriaConsumoEnergetico, pesoKg);
         this.tamanioPulgadas = tamanioPulgadas;
         this.sintonizadorTDT = sintonizadorTDT;
@@ -35,6 +35,7 @@ public class Televisor extends Electrodomestico {
 
     public void crearTelevisor() {
         Scanner input = new Scanner(System.in);
+        System.out.println("Creamos un televisor :");
         super.crearElectrodomestico();
         System.out.print("Ingrese el tamanio el pulgadas: >> ");
         tamanioPulgadas = input.nextDouble();
@@ -60,9 +61,9 @@ public class Televisor extends Electrodomestico {
 
     @Override
     public String toString() {
-        return "Tipo: " + tipo + "\n" + 
-               "tamanioPulgadas: " + tamanioPulgadas + "\n" +
-               "sintonizadorTDT: " + sintonizadorTDT + "\n" +
-               super.toString();
+        return "Tipo: " + tipo + "\n"
+                + "tamanioPulgadas: " + tamanioPulgadas + "\n"
+                + "sintonizadorTDT: " + sintonizadorTDT + "\n"
+                + super.toString();
     }
 }

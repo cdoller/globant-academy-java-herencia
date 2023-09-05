@@ -18,8 +18,8 @@ public class ServicioElectrodomestico {
     public ArrayList<Electrodomestico> getListaElectrodom() {
         return listaElectrodom;
     }
-    
-    public void imprimirListaElectrodomesticos(){
+
+    public void imprimirListaElectrodomesticos() {
         for (Electrodomestico e : listaElectrodom) {
             System.out.println(e.toString());
         }

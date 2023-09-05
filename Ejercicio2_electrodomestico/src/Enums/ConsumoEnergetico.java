@@ -1,9 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package Enums;
 
 public enum ConsumoEnergetico {
-    A, B, C, D, E, F;
+    A(1000), B(800), C(600), D(500), E(300), F(100);
+
+    private final double precioBase;
+
+    ConsumoEnergetico(double precio) {
+        precioBase = precio;
+    }
+
+    public double getPrecioBase() {
+        return precioBase;
+    }
+
 }

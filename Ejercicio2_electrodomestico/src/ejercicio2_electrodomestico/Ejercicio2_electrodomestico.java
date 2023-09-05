@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package ejercicio2_electrodomestico;
 
 import Entidad.Lavadora;
@@ -19,17 +15,17 @@ public class Ejercicio2_electrodomestico {
      */
     public static void main(String[] args) {
         ServicioElectrodomestico servElectr = new ServicioElectrodomestico();
-        
-        
-        Lavadora drean = new Lavadora();
-        drean.crearLavadora();
-        Televisor lg = new Televisor();
-        lg.crearTelevisor();
-        
-        servElectr.addElectrodomestico(drean);
-        servElectr.addElectrodomestico(lg);
-//        System.out.println(servElectr.getListaElectrodom().toString());
+
+        Televisor tv = new Televisor();
+        Lavadora lavadora = new Lavadora();
+
+        tv.crearTelevisor();
+        lavadora.crearLavadora();
+
+        servElectr.addElectrodomestico(lavadora);
+        servElectr.addElectrodomestico(tv);
+
         servElectr.imprimirListaElectrodomesticos();
     }
-    
+
 }

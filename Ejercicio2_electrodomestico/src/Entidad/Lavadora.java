@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidad;
 
 import java.util.Scanner;
@@ -14,7 +10,7 @@ public class Lavadora extends Electrodomestico {
     public Lavadora() {
     }
 
-    public Lavadora(Double carga, double precioUsd, String color, char categoriaConsumoEnergetico, double pesoKg) {
+    public Lavadora(Double carga, double precioUsd, String color, String categoriaConsumoEnergetico, double pesoKg) {
         super(precioUsd, color, categoriaConsumoEnergetico, pesoKg);
         this.cargaKg = carga;
     }
@@ -25,7 +21,7 @@ public class Lavadora extends Electrodomestico {
 
     public static void setTipo(String tipo) {
         Lavadora.tipo = tipo;
-    }    
+    }
 
     public Double getCarga() {
         return cargaKg;
@@ -37,6 +33,7 @@ public class Lavadora extends Electrodomestico {
 
     public void crearLavadora() {
         Scanner input = new Scanner(System.in);
+        System.out.println("Creamos una lavadora :");
         super.crearElectrodomestico();
         System.out.print("Introduzca la carga: >> ");
         cargaKg = input.nextDouble();
@@ -46,16 +43,16 @@ public class Lavadora extends Electrodomestico {
     @Override
     public void precioFinal() {
         super.precioFinal();
-        if(cargaKg>30){
+        if (cargaKg > 30) {
             precioUsd += 500;
         }
     }
 
     @Override
     public String toString() {
-        return "Tipo: " + tipo + "\n" +
-               "cargaKg: " + cargaKg + "\n" +
-               super.toString();
+        return "Tipo: " + tipo + "\n"
+                + "cargaKg: " + cargaKg + "\n"
+                + super.toString();
     }
 
 }

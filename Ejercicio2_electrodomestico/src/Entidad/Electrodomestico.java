@@ -7,16 +7,16 @@ public class Electrodomestico {
 
     protected double precioUsd;
     protected String color;
-    protected char categoriaConsumoEnergetico;
+    protected ConsumoEnergetico categoria;
     protected double pesoKg;
 
     public Electrodomestico() {
     }
 
-    public Electrodomestico(double precioUsd, String color, char categoriaConsumoEnergetico, double pesoKg) {
+    public Electrodomestico(double precioUsd, String color, String categoria, double pesoKg) {
         this.precioUsd = precioUsd;
         this.color = comprobarColor(color);
-        this.categoriaConsumoEnergetico = comprobarConsumoEnergetico(categoriaConsumoEnergetico);
+        this.categoria = comprobarConsumoEnergetico(categoria.charAt(0));
         this.pesoKg = comprobarPeso(pesoKg);
     }
 
@@ -36,12 +36,12 @@ public class Electrodomestico {
         this.color = color;
     }
 
-    public char getCategoriaConsumo() {
-        return categoriaConsumoEnergetico;
+    public ConsumoEnergetico getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriaConsumo(char categoriaConsumoEnergetico) {
-        this.categoriaConsumoEnergetico = categoriaConsumoEnergetico;
+    public void setCategoria(ConsumoEnergetico categoria) {
+        this.categoria = categoria;
     }
 
     public double getPesoKg() {
@@ -52,12 +52,14 @@ public class Electrodomestico {
         this.pesoKg = pesoKg;
     }
 
-    private char comprobarConsumoEnergetico(char categoriaConsumo) {
+    private ConsumoEnergetico comprobarConsumoEnergetico(char categoriaConsumo) {
         String categoria = "" + categoriaConsumo;
-        if (!categoria.toUpperCase().matches("^(A|B|C|D|E|F)$")) {
-            return 'F';
+        for (ConsumoEnergetico cons : ConsumoEnergetico.values()) {
+            if (cons.toString().equals(categoria)) {
+                return cons;
+            }
         }
-        return categoria.charAt(0);
+        return ConsumoEnergetico.F;
     }
 
     private String comprobarColor(String color) {
@@ -66,9 +68,9 @@ public class Electrodomestico {
         }
         return color;
     }
-    
-    private double comprobarPeso(double peso){
-        if(peso<0){
+
+    private double comprobarPeso(double peso) {
+        if (peso < 0) {
             return 1d;
         }
         return peso;
@@ -78,7 +80,7 @@ public class Electrodomestico {
         Scanner input = new Scanner(System.in);
         this.precioUsd = 1000d;
         System.out.print("Ingrese la categoria energetica: >> ");
-        categoriaConsumoEnergetico = comprobarConsumoEnergetico(input.next().charAt(0));
+        categoria = comprobarConsumoEnergetico(input.next().charAt(0));
         System.out.print("Ingrese el color: >> ");
         color = comprobarColor(input.next());
         System.out.print("Ingrese el peso: >> ");
@@ -86,29 +88,7 @@ public class Electrodomestico {
     }
 
     public void precioFinal() {
-        switch (categoriaConsumoEnergetico) {
-            case 'A':
-                precioUsd += 1000;
-                break;
-            case 'B':
-                precioUsd += 800;
-                break;
-            case 'C':
-                precioUsd += 600;
-                break;
-            case 'D':
-                precioUsd += 500;
-                break;
-            case 'E':
-                precioUsd += 300;
-                break;
-            case 'F':
-                precioUsd += 100;
-                break;
-            default:
-                precioUsd += 0;
-        }
-
+        precioUsd += categoria.getPrecioBase();
         if (pesoKg >= 80) {
             precioUsd += 1000;
         } else if (pesoKg >= 50 && pesoKg <= 79) {
@@ -118,15 +98,14 @@ public class Electrodomestico {
         } else if (pesoKg >= 1 && pesoKg <= 19) {
             precioUsd += 100;
         }
-
     }
 
     @Override
     public String toString() {
-        return  "precioUsd: " + precioUsd + "\n" +
-                "color: " + color + "\n" +
-                "categoriaConsumoEnergetico: " + categoriaConsumoEnergetico + "\n" +
-                "pesoKg: " + pesoKg + "\n";
+        return "precioUsd: " + precioUsd + "\n"
+                + "color: " + color + "\n"
+                + "categoriaConsumoEnergetico: " + categoria.toString() + "\n"
+                + "pesoKg: " + pesoKg + "\n";
     }
 
 }
