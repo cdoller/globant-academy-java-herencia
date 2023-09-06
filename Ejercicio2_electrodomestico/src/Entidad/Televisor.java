@@ -11,8 +11,8 @@ public class Televisor extends Electrodomestico {
     public Televisor() {
     }
 
-    public Televisor(double tamanioPulgadas, boolean sintonizadorTDT, double precioUsd, String color, String categoriaConsumoEnergetico, double pesoKg) {
-        super(precioUsd, color, categoriaConsumoEnergetico, pesoKg);
+    public Televisor(double tamanioPulgadas, boolean sintonizadorTDT, String color, String categoriaConsumoEnergetico, double pesoKg) {
+        super(color, categoriaConsumoEnergetico, pesoKg, "Televisor");
         this.tamanioPulgadas = tamanioPulgadas;
         this.sintonizadorTDT = sintonizadorTDT;
     }
@@ -45,7 +45,6 @@ public class Televisor extends Electrodomestico {
         } else {
             sintonizadorTDT = true;
         }
-        precioFinal();
     }
 
     @Override

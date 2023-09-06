@@ -4,23 +4,14 @@ import java.util.Scanner;
 
 public class Lavadora extends Electrodomestico {
 
-    protected static String tipo = "Lavadora";
     protected Double cargaKg;
 
     public Lavadora() {
     }
 
-    public Lavadora(Double carga, double precioUsd, String color, String categoriaConsumoEnergetico, double pesoKg) {
-        super(precioUsd, color, categoriaConsumoEnergetico, pesoKg);
+    public Lavadora(Double carga, String color, String categoriaConsumoEnergetico, double pesoKg) {
+        super(color, categoriaConsumoEnergetico, pesoKg, "Lavadora");
         this.cargaKg = carga;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public static void setTipo(String tipo) {
-        Lavadora.tipo = tipo;
     }
 
     public Double getCarga() {
@@ -37,7 +28,6 @@ public class Lavadora extends Electrodomestico {
         super.crearElectrodomestico();
         System.out.print("Introduzca la carga: >> ");
         cargaKg = input.nextDouble();
-        precioFinal();
     }
 
     @Override

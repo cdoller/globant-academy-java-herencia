@@ -3,21 +3,41 @@ package Entidad;
 import Enums.ConsumoEnergetico;
 import java.util.Scanner;
 
+/**
+ * Modela un electrodomestico con ciertos atributos.
+ * En base a sus caracteristicas tendra un precio especifico.
+ * Posee metodos para validar algunos atributos.
+ * Es una clase que puede ser extendida.
+ * 
+ * @author Carlos
+ */
 public class Electrodomestico {
 
-    protected double precioUsd;
+    protected double precioUsd = 1000;
     protected String color;
     protected ConsumoEnergetico categoria;
     protected double pesoKg;
+    protected String tipo;
 
+    /**
+     * Crea un electrodomestico sin parametros.
+     * Trabaja en conjunto con los constructores de sus hijos.
+     */
     public Electrodomestico() {
     }
 
-    public Electrodomestico(double precioUsd, String color, String categoria, double pesoKg) {
-        this.precioUsd = precioUsd;
+    /**
+     * Crea un nuevo electrodomestico
+     * @param color 
+     * @param categoria categoria energetica
+     * @param pesoKg 
+     * @param tipo tipo de electrodomestico, ej: televisor, lavadora, etc
+     */
+    public Electrodomestico(String color, String categoria, double pesoKg, String tipo) {
         this.color = comprobarColor(color);
         this.categoria = comprobarConsumoEnergetico(categoria.charAt(0));
         this.pesoKg = comprobarPeso(pesoKg);
+        this.tipo = tipo;
     }
 
     public double getPrecioUsd() {
@@ -52,6 +72,21 @@ public class Electrodomestico {
         this.pesoKg = pesoKg;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    /**
+     * Comprueba que la categoria de consumo sea valida.
+     * En caso de no serlo coloca una por defecto.
+     * @param categoriaConsumo
+     * @return categoria energetica valida
+     * @return F en caso de que no sea una categoria energetica valida
+     */
     private ConsumoEnergetico comprobarConsumoEnergetico(char categoriaConsumo) {
         String categoria = "" + categoriaConsumo;
         for (ConsumoEnergetico cons : ConsumoEnergetico.values()) {
@@ -62,6 +97,13 @@ public class Electrodomestico {
         return ConsumoEnergetico.F;
     }
 
+    /**
+     * Comprueba que el color sea valido.
+     * En caso de no serlo, coloca uno por defecto
+     * @param color
+     * @return color valido
+     * @return "BLANCO" en caso de no ser un color valido
+     */
     private String comprobarColor(String color) {
         if (!color.toUpperCase().matches("^(BLANCO|NEGRO|ROJO|AZUL|GRIS)$")) {
             return "BLANCO";
@@ -69,6 +111,13 @@ public class Electrodomestico {
         return color;
     }
 
+    /**
+     * Comprueba que el peso sea un valor positivo.
+     * En caso de no serlo coloca un valor por defecto.
+     * @param peso
+     * @return peso valido
+     * @return 1kg en caso de no ser un peso valido
+     */
     private double comprobarPeso(double peso) {
         if (peso < 0) {
             return 1d;
@@ -76,6 +125,9 @@ public class Electrodomestico {
         return peso;
     }
 
+    /**
+     * Crea un electrodomestico solicitando los datos al usuario.
+     */
     public void crearElectrodomestico() {
         Scanner input = new Scanner(System.in);
         this.precioUsd = 1000d;
@@ -87,6 +139,10 @@ public class Electrodomestico {
         pesoKg = comprobarPeso(input.nextDouble());
     }
 
+    /**
+     * Calcula el precio final de un electrodomestico.
+     * Este metodo es sobreescrito en las clases que heredan.
+     */
     public void precioFinal() {
         precioUsd += categoria.getPrecioBase();
         if (pesoKg >= 80) {
