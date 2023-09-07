@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Lavadora extends Electrodomestico {
 
+    protected static String tipo = "Lavadora";
     protected Double cargaKg;
 
     public Lavadora() {
