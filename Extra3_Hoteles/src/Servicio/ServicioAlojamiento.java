@@ -133,11 +133,12 @@ public class ServicioAlojamiento {
 
     public void imprimirHoteles() {
         boolean noHayHoteles = true;
+        alojamientos.sort(compararPorTipo);
+        alojamientos.sort(compararPorPrecio);
+
         System.out.println("------Listado Hoteles------");
         System.out.printf("%-20s | %-25s | %-30s | %-20s | %-10s%n",
                 "TIPO", "NOMBRE", "DIRECCION", "LOCALIDAD", "PRECIO");
-
-        Collections.sort(alojamientos, compararPorPrecio);
         for (Alojamiento aux : alojamientos) {
             if (aux instanceof Hotel) {
                 System.out.printf("%-20s | %-25s | %-30s | %-20s | %-10s%n",
@@ -156,7 +157,7 @@ public class ServicioAlojamiento {
         System.out.println("------Listado Campings con restaurante ------");
         System.out.printf("%-20s | %-25s | %-30s | %-20s%n",
                 "TIPO", "NOMBRE", "DIRECCION", "LOCALIDAD");
-        
+
         for (Alojamiento aux : alojamientos) {
             if (aux instanceof Camping) {
                 if (((Camping) aux).isPoseeRestaurante()) {
@@ -193,8 +194,11 @@ public class ServicioAlojamiento {
         }
     }
 
-    public static Comparator<Alojamiento> compararPorPrecio = (Alojamiento a, Alojamiento a1)-> {
-        if(a instanceof Hotel && a1 instanceof Hotel){
+    public static Comparator<Alojamiento> compararPorTipo = (Alojamiento a, Alojamiento a1)
+            -> a.getTipo().compareTo(a1.getTipo());
+
+    public static Comparator<Alojamiento> compararPorPrecio = (Alojamiento a, Alojamiento a1) -> {
+        if (a instanceof Hotel && a1 instanceof Hotel) {
             Hotel h = (Hotel) a;
             Hotel h1 = (Hotel) a1;
             return Double.compare(h1.getPrecioHabitacion(), h.getPrecioHabitacion());
